@@ -1,7 +1,7 @@
 <?php
-require 'TGGroconBot.php';
-require 'Exchange.php';
-require 'config.php';
+require_once 'TGGroconBot.php';
+require_once 'BittrexExchange.php';
+require_once 'config.php';
 
 $bot = new TGGroconBot(BOT_TGTOKEN);
 $btex = new BittrexExchange;
