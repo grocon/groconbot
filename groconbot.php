@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 require_once 'TGGroconBot.php';
 require_once 'BittrexExchange.php';
