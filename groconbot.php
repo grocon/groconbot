@@ -1,32 +1,36 @@
 <?php
 require_once 'TGGroconBot.php';
 require_once 'BittrexExchange.php';
+require_once 'PoloniexExchange.php';
 require_once 'config.php';
 
 $bot = new TGGroconBot(BOT_TGTOKEN);
 $btex = new BittrexExchange;
 
+$exchanges = array(new BittrexExchange, new PoloniexExchange);
 
 while(true) {
-	$newmarkets = $btex->getNewMarkets();
-	$deletedmarkets = $btex->getDeletedMarkets();
+	foreach($exchanges as $ex) {
+		$newmarkets = $ex->getNewMarkets();
+		$deletedmarkets = $ex->getDeletedMarkets();
 
-	if(count($newmarkets) || count($deletedmarkets)) {
-		echo count($newmarkets)." marchés ajoutés et ".count($deletedmarkets)." supprimés...\n";
-		$message = "BITTREX";
-		if(count($newmarkets)) {
-			$message = "marchés ajoutés : \n";
-			foreach($newmarkets as $k=>$v) {
-				$message.=$k."\n";
+		if(count($newmarkets) || count($deletedmarkets)) {
+			echo $ex->getName().' : '.count($newmarkets)." marchés ajoutés et ".count($deletedmarkets)." supprimés...\n";
+			$message = $ex->getName();
+			if(count($newmarkets)) {
+				$message .= "\nmarchés ajoutés : \n";
+				foreach($newmarkets as $k=>$v) {
+					$message.=$k."\n";
+				}
 			}
-		}
-		if(count($deletedmarkets)) {
-			$message .= "\nmarchés supprimés : \n";
-			foreach($deletedmarkets as $k=>$v) {
-				$message.=$k."\n";
+			if(count($deletedmarkets)) {
+				$message .= "\nmarchés supprimés : \n";
+				foreach($deletedmarkets as $k=>$v) {
+					$message.=$k."\n";
+				}
 			}
+			$bot->broadcast($message);
 		}
-		$bot->broadcast($message);
 	}
 	sleep(30);
 }
