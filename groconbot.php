@@ -32,6 +32,7 @@ while(true) {
 			$bot->broadcast($message);
 		}
 	}
+	$bot->update();
 	sleep(30);
 }
 
