@@ -4,6 +4,7 @@ class TGGroconBot {
 	private $tgUrl;
 	private $db;
 	private $chats = array();
+	private $lastupdateid = 0;
 
 	function __construct($token) {
 		$this->curl = curl_init();
@@ -41,7 +42,7 @@ class TGGroconBot {
 // 		echo "\n======== getUpdates\n";
 		$endpointUrl = $this->tgUrl.'getUpdates';
 		$data = new stdClass;
-		$data->offset = 0;
+		$data->offset = $this->lastupdateid + 1;
 
 		$result = $this->postData($endpointUrl, json_encode($data), 'application/json');
 		$result = json_decode($result);
@@ -53,9 +54,15 @@ class TGGroconBot {
 // 		echo "\n======== update\n";
 		$updates = $this->getUpdates();
 		foreach($updates->result as $x) {
+			$this->lastupdateid = $x->update_id;
 			$this->chats[$x->message->chat->id] = $x->message->chat->first_name;
 			$st = $this->db->prepare('insert into chats(id, username) values(?, ?)');
 			$st->execute(array($x->message->chat->id, $x->message->chat->first_name));
+
+			// /prout command
+			if(strpos($x->message->text, '/prout') === 0) {
+				$this->sendTextMessage($x->message->chat->id, 'prout...');
+			}
 		}
 	}
 
