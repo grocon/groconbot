@@ -70,6 +70,7 @@ class TGGroconBot {
 		$this->update();
 		foreach($this->chats as $chatid=>$user) {
 			$this->sendTextMessage($chatid, $text);
+			usleep(33000);
 		}
 	}
 }
