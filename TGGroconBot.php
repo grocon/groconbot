@@ -9,6 +9,8 @@ class TGGroconBot {
 	function __construct($token) {
 		$this->curl = curl_init();
 		curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($this->curl, CURLOPT_CONNECTTIMEOUT, 3);
+		curl_setopt($this->curl, CURLOPT_TIMEOUT, 5);
 // 		curl_setopt($this->curl, CURLOPT_VERBOSE, true);
 
 		$this->tgUrl = 'https://api.telegram.org/bot'.urlencode($token).'/';

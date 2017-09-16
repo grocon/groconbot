@@ -14,7 +14,10 @@ class Exchange {
 	protected function updateMarketList() {
 		if((time() - $this->tLastUpdate) > 10) {
 			$this->markets = $this->updatedmarkets;
-			$this->updatedmarkets = $this->_updateMarketList();
+			$x = $this->_updateMarketList();
+			if($x !== false) {
+				$this->updatedmarkets = $x;
+			}
 		}
 	}
 
