@@ -57,13 +57,17 @@ class TGGroconBot {
 		$updates = $this->getUpdates();
 		foreach($updates->result as $x) {
 			$this->lastupdateid = $x->update_id;
-			$this->chats[$x->message->chat->id] = $x->message->chat->first_name;
+			if($x->channel_post) $event = $x->channel_post;
+			elseif($x->message) $event = $x->message;
+			else continue;
+
+			$this->chats[$event->chat->id] = $event->chat->first_name;
 			$st = $this->db->prepare('insert into chats(id, username) values(?, ?)');
-			$st->execute(array($x->message->chat->id, $x->message->chat->first_name));
+			$st->execute(array($event->chat->id, $event->chat->first_name));
 
 			// /prout command
-			if(strpos($x->message->text, '/prout') === 0) {
-				$this->sendTextMessage($x->message->chat->id, 'prout...');
+			if(strpos($event->text, '/prout') === 0) {
+				$this->sendTextMessage($event->chat->id, 'prout...');
 			}
 		}
 	}
