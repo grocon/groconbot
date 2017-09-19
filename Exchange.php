@@ -25,7 +25,7 @@ class Exchange {
 
 	public function getNewMarkets() {
 		$this->updateMarketList();
-		echo count($this->markets)." dans markets et ".count($this->updatedmarkets)." dans updatedmarkets...\n";
+		echo $this->getName()." : ".count($this->markets)." dans markets et ".count($this->updatedmarkets)." dans updatedmarkets...\n";
 		$newmarkets = array_diff_key($this->updatedmarkets, $this->markets);
 		return $newmarkets;
 	}
