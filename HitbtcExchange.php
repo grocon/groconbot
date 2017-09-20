@@ -8,7 +8,7 @@ class HitbtcExchange extends Exchange {
 		if(!is_object($markets)) return false;
 		if(count($markets) == 0) return false;
 		foreach($markets as $market=>$v) {
-			if(rand(0, 10) != 1)
+// 			if(rand(0, 10) != 1)
 			$result[$market] = 1;
 		}
 		$this->tLastUpdate = time();
