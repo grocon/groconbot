@@ -10,7 +10,7 @@ require_once 'config.php';
 $bot = new TGGroconBot(BOT_TGTOKEN);
 $btex = new BittrexExchange;
 
-$exchanges = array(new BittrexExchange, new PoloniexExchange, new LiquiExchange, new HitbtcExchange);
+$exchanges = array(new BittrexExchange, new PoloniexExchange, new LiquiExchange/*, new HitbtcExchange*/);
 
 while(true) {
 	foreach($exchanges as $ex) {

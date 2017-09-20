@@ -24,6 +24,8 @@ class TGGroconBot {
 		foreach($resChats as $chat) {
 			$this->chats[$chat['id']] = $chat['username'];
 		}
+
+		print_r($this->chats);
 	}
 
 	private function postData($url, $data, $contenttype) {
