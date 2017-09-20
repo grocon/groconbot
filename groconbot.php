@@ -4,12 +4,13 @@ require_once 'TGGroconBot.php';
 require_once 'BittrexExchange.php';
 require_once 'PoloniexExchange.php';
 require_once 'LiquiExchange.php';
+require_once 'HitbtcExchange.php';
 require_once 'config.php';
 
 $bot = new TGGroconBot(BOT_TGTOKEN);
 $btex = new BittrexExchange;
 
-$exchanges = array(new BittrexExchange, new PoloniexExchange, new LiquiExchange);
+$exchanges = array(new BittrexExchange, new PoloniexExchange, new LiquiExchange, new HitbtcExchange);
 
 while(true) {
 	foreach($exchanges as $ex) {

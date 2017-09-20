@@ -17,6 +17,13 @@ class TGGroconBot {
 
 		$this->db = new PDO('sqlite:groconbot.sqlite');
 		$this->db->exec("CREATE TABLE if not exists chats (id INTEGER PRIMARY KEY, username varchar(200))");
+
+		if(!$resChats = $this->db->query('select * from chats')) {
+			echo "error get chat list from db\n";exit;
+		}
+		foreach($resChats as $chat) {
+			$this->chats[$chat['id']] = $chat['username'];
+		}
 	}
 
 	private function postData($url, $data, $contenttype) {
