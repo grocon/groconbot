@@ -9,7 +9,10 @@ class LiquiExchange extends Exchange {
 		if(!is_object($markets->pairs)) return false;
 		if(count($markets->pairs) == 0) return false;
 		foreach($markets->pairs as $market=>$v) {
-			if($v->hidden) continue;
+			if($v->hidden) {
+				$market .= ' (caché)';
+// 				echo "$market\n";
+			}
 // 			if(rand(0, 10) != 1)
 			$result[$market] = 1;
 		}

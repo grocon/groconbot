@@ -9,8 +9,10 @@ class BittrexExchange extends Exchange {
 		if(count($markets->result) == 0) return false;
 		foreach($markets->result as $market) {
 			if($market->IsActive) {
-// 				if(rand(0, 10) != 1)
 				$result[$market->MarketName] = 1;
+			}
+			else {
+				$result[$market->MarketName.' (desactivé)'] = 1;
 			}
 		}
 		$this->tLastUpdate = time();
