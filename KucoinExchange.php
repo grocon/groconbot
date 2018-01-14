@@ -16,7 +16,7 @@ class KucoinExchange extends Exchange {
 			}
 		}
 		$this->tLastUpdate = time();
-		print_r($result);
+		return $result;
 	}
 
 	public function getName() {
@@ -31,4 +31,4 @@ class KucoinExchange extends Exchange {
 //
 // print_r($newmarkets);
 // print_r($deletedmarkets);
-//
+
