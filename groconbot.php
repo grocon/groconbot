@@ -6,12 +6,13 @@ require_once 'PoloniexExchange.php';
 require_once 'LiquiExchange.php';
 require_once 'HitbtcExchange.php';
 require_once 'BinanceExchange.php';
+require_once 'KucoinExchange.php';
 require_once 'config.php';
 
 $bot = new TGGroconBot(BOT_TGTOKEN);
 $btex = new BittrexExchange;
 
-$exchanges = array(new BittrexExchange, new PoloniexExchange, new LiquiExchange, new BinanceExchange, new HitbtcExchange);
+$exchanges = array(new BittrexExchange, new PoloniexExchange, new LiquiExchange, new BinanceExchange, new HitbtcExchange, new KucoinExchange);
 
 while(true) {
 	foreach($exchanges as $ex) {
