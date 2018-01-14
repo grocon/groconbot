@@ -20,7 +20,7 @@ class KucoinExchange extends Exchange {
 	}
 
 	public function getName() {
-		return 'BINANCE';
+		return 'KUCOIN';
 	}
 }
 
